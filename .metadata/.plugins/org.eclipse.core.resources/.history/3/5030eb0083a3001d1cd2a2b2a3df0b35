@@ -1,0 +1,88 @@
+package com.Stepdefination;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.Utility.Log;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class OrangeHRMApplicationMethods
+{
+	    public WebDriver driver;
+		
+		String applicationUrlAddress=" http://127.0.0.1/orangehrm-4.2.0.1/symfony/web/index.php/auth/login";
+		
+		
+	
+	@Given("^User should open ChromeBrowser in the system$")
+	public void user_should_open_ChromeBrowser_in_the_system()
+	{
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\Dell\\Desktop\\Eclipse1\\CucumberOrangeHRMApplication\\DriverFiles\\chromedriver.exe" );
+		
+		
+		driver =new ChromeDriver();
+		
+		
+	//	driver.get(applicationUrlAddress);
+	//	driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		//driver.manage().deleteAllCookies();
+		driver.manage().timeouts().pageLoadTimeout(40,TimeUnit.SECONDS);
+		 Log.info("successfully navigate to orangeloginpage");
+		
+		
+	}
+	 
+	
+
+	@When("^User enters OrangeHrm application Url address$")
+	public void user_enters_OrangeHrm_application_Url_address()
+	{
+		driver.get(applicationUrlAddress);
+		driver.manage().window().maximize();
+	}
+	   
+	
+
+	@Then("^User should be navigated to OrangeHRM Application LogIn Page$")
+	public void user_should_be_navigated_to_OrangeHRM_Application_LogIn_Page()
+	{
+		 String   expected_OrangeLoginPanel="LOGIN Panel";
+		 System.out.println("expected login panel is:"+expected_OrangeLoginPanel);
+		 
+		 //<div id="logInPanelHeading">LOGIN Panel</div>
+		 
+		 By  LoginPanelL=By.id("logInPanelHeading");
+		  WebElement  LoginPanel=driver.findElement(LoginPanelL);
+		  
+		  String  actual_OrangeLoginPanal=LoginPanel.getText();
+		  System.out.println(" actualLoginPanal is:"+actual_OrangeLoginPanal);
+		  
+		  if(actual_OrangeLoginPanal.equals(expected_OrangeLoginPanel))
+		  {
+			  System.out.println(" pass");
+		  }
+		  else
+		  {
+			  System.out.println(" fail");
+		  }
+			
+	}
+		
+
+
+	@Then("^User should be close the OrangeHRM Applicatio with the Browser$")
+	public void user_should_be_close_the_OrangeHRM_Applicatio_with_the_Browser()
+	{
+	   
+          driver.quit();
+
+}
+}

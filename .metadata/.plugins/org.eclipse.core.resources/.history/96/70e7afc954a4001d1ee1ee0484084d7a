@@ -1,0 +1,187 @@
+package com.Stepdefination;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.Utility.Log;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class OrangeHRMApplicationMethods
+{
+	
+	public OrangeHRMApplicationMethods(Hooks hook)  // its a consructer
+	{
+		   driver=hook.driver;
+	}
+	
+	
+	    public WebDriver driver;
+		
+		String applicationUrlAddress=" http://127.0.0.1/orangehrm-4.2.0.1/symfony/web/index.php/auth/login";
+		 
+	 
+		@Given("^User should open ChromeBrowser in the system$")
+		public void user_should_open_ChromeBrowser_in_the_system() 
+		{
+			System.setProperty("webdriver.chrome.driver","C:\\Users\\Dell\\Desktop\\Eclipse1\\JavaProgram\\DriverFiles\\chromedriver.exe" );
+			
+			
+			driver =new ChromeDriver();
+			
+			
+			//driver.get(applicationUrlAddress);
+			//driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+			//driver.manage().deleteAllCookies();
+			driver.manage().timeouts().pageLoadTimeout(40,TimeUnit.SECONDS);
+			 Log.info("successfully navigate to orangeloginpage"); 
+		}
+
+		@When("^User enters OrangeHrm application Urladdress$")
+		public void user_enters_OrangeHrm_application_Urladdress()
+		{
+			driver.get(applicationUrlAddress);
+			driver.manage().window().maximize();
+			
+		}
+
+		@Then("^User should be navigated to OrangeHRM Application LogIn Page$")
+		public void user_should_be_navigated_to_OrangeHRM_Application_LogIn_Page()
+		{
+		  
+		By OrangeHRMLoginPanelText=By.id("logInPanelHeading");
+		WebElement LoginPanelText=driver.findElement(OrangeHRMLoginPanelText);
+		String actual_LoginPanelText=LoginPanelText.getText();
+		String expected_LoginPanelText="LOGIN Panel";
+		
+		if(actual_LoginPanelText.equals(expected_LoginPanelText))
+		{
+			Log.info(" OrangeHRM Login Panel-pass");
+			
+		}
+		else
+		{
+			Log.info("OrangeHRM Login Panel -fail ");
+		}
+		     
+		}
+
+		@Then("^User should be close the OrangeHRM Applicatio with the Browser$")
+		public void user_should_be_close_the_OrangeHRM_Applicatio_with_the_Browser()
+		{
+		   
+			driver.quit();
+			Log.info("successfully Orange Hrm Application Closed success");
+			
+		}
+        
+		
+		
+		@When("^User enters OrangeHrm application Url address$")
+		public void user_enters_OrangeHrm_application_Url_address() 
+		{
+			driver.get(applicationUrlAddress);
+			driver.manage().window().maximize();
+
+			
+		}
+
+		@Then("^User should enter UserName and Password and click on logIn button$")
+		public void user_should_enter_UserNae_and_Password_and_click_on_logIn_button() 
+		{
+			
+			String UserNameTestData="Hannusk";
+			WebElement UserNameElement=driver.findElement(By.id("txtUsername"));
+			UserNameElement.sendKeys(UserNameTestData);			
+			
+			
+			String PasswordTestData="Hannu012001@";
+
+			By PasswordL =By.name("txtPassword");
+			WebElement Password1=driver.findElement(PasswordL);
+			Password1.sendKeys(PasswordTestData);
+			
+			By Loginbutton = By.className("button");
+			WebElement LoginButtonL=driver.findElement(Loginbutton);
+			LoginButtonL.click(); 
+			
+			
+		}
+		
+		@Then("^User should enter\"([^\"]*)\"and\"([^\"]*)\" and click on logIn button$")
+		public void user_should_enter_and_and_click_on_logIn_button(String UserName, String Password) 
+		{
+			
+			Log.info("The user name is:"+UserName);
+		 By  UserNameL=By.id("txtUsername");
+		WebElement userName=driver.findElement(UserNameL);
+		userName.sendKeys(UserName);
+		
+		By PasswordL=By.name("txtPassword");
+	    WebElement password=driver.findElement(PasswordL);
+	    password.sendKeys(Password);
+	    
+	    By Loginbutton = By.className("button");
+		WebElement LoginButtonL=driver.findElement(Loginbutton);
+		LoginButtonL.click(); 
+			
+			
+			
+		}
+
+
+
+		@Then("^User sshould be able to navigate to OrangeHRM Application Homepage$")
+		public void user_sshould_be_able_to_navigate_to_OrangeHRM_Application_Homepage() 
+		{
+			  By WelcomeAdminL=By.id("welcome");
+			     WebElement WelcomeAdmin=driver.findElement(WelcomeAdminL);
+			     WelcomeAdmin.click();
+				
+			
+			
+		}
+
+		@Then("^User should logOut the OrangeHRM Application$")
+		public void user_should_logOut_the_OrangeHRM_Application() throws InterruptedException 
+		{
+		    Thread.sleep(4000);
+			 By LogoutL=By.linkText("Logout");
+		      WebElement  Logout=driver.findElement(LogoutL);
+			  Logout.click();  
+	           
+		}
+		
+		
+
+           
+		@Then("^User should enter PIM HomePage$")
+		public void user_should_enter_PIM_HomePage() 
+		{
+			   By pimL=By.linkText("PIM");
+	     	   WebElement  pim=driver.findElement(pimL);
+	     	   pim.click();
+	     	
+		}
+
+		@Then("^User should go to Add Employee Homepage$")
+		public void user_should_go_to_Add_Employee_Homepage() throws InterruptedException 
+		{
+			Thread.sleep(4000);
+			  By AddEmployeeL=By.linkText("Add Employee");
+	        	WebElement AddEmployee=driver.findElement(AddEmployeeL);
+	        	AddEmployee.click();
+	     			
+			
+		}
+		
+	
+	
+}

@@ -1,0 +1,21 @@
+
+# logInPanal Test Element Property- id locator
+logInnPageLogInPanalProperty=logInPanelHeading
+
+# UserName ElementProperty-id locator
+userNameProperty=txtUsername
+
+#password ElementProperty-id locator
+passwordNameProperty=txtPassword
+
+#logInButton ElementProperty-classNamelocator
+logInButtonProperty=button
+
+#Admin page ElementPropert- id locator
+AdminProperty=menu_admin_viewAdminModule
+
+#WelcomeAdmin ElementProperty-id locator
+welcomeAdminProperty=welcome
+
+#logOut ElementProperty- link test locator
+logOutProperty=Logout

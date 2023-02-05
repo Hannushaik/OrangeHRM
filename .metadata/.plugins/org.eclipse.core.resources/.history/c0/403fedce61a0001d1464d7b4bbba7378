@@ -1,0 +1,176 @@
+package com.OrangeHRMApplicationTestCases;
+
+
+import java.io.FileInputStream;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import org.testng.annotations.Test;
+
+import com.BaseTest.BaseTest;
+
+
+public class OrangeHRM_LogINTest extends BaseTest
+  {
+	
+//	private static final String WorkBook = null;
+	FileInputStream file;
+	 XSSFWorkbook workBook;
+	 XSSFSheet sheet;
+	 Row row;
+	 Cell RowOfCell;
+	 FileOutputStream file1;
+	 Properties property;
+	 FileInputStream PropertiesFile;
+	 
+	@Test(priority=1)
+	public void OrangeHRMLoginPage() throws IOException, InterruptedException
+	{
+		  file=new FileInputStream("C:\\Users\\Dell\\Desktop\\Eclipse1\\OrangeHRM_DDT\\logFiles\\Log4j.properties");
+		   workBook=new XSSFWorkbook(file);
+		 sheet=workBook.getSheet("sheet1");
+		   row=sheet.getRow(1);
+		 Cell RowOfCell=row.getCell(0);
+		 
+		 
+		 // Identifying the properties file
+		 PropertiesFile=new FileInputStream("./src/com/Config/OrangeHRMApplication.Properties.txt");
+		  // creating an object for properties
+		  property=new Properties();
+		  property.load(PropertiesFile);
+		
+		
+		
+		 String   expected_OrangeLoginPanel="LOGIN Panel";
+		 System.out.println("expected login panel is:"+expected_OrangeLoginPanel);
+		 
+		 //<div id="logInPanelHeading">LOGIN Panel</div>
+		 
+		 By  LoginPanelL=By.id(property.getProperty("logInnPageLogInPanalProperty"));
+		  WebElement  LoginPanel=driver.findElement(LoginPanelL);
+		  
+		  String  actual_OrangeLoginPanal=LoginPanel.getText();
+		  System.out.println(" actualLoginPanal is:"+actual_OrangeLoginPanal);
+		  
+		  if(actual_OrangeLoginPanal.equals(expected_OrangeLoginPanel))
+		  {
+			  System.out.println(" pass");
+		  }
+		  else
+		  {
+			  System.out.println(" fail");
+		  }
+	}    
+		   @Test(priority=2)
+		   public  void logInTest() throws IOException
+	      { 
+		  // <input name="txtUsername" id="txtUsername" type="text">
+			 
+		    String UsernameTestdata="Hannusk";
+		    By UserNameL=By.id(property.getProperty("userNameProperty"));
+		    WebElement UserName= driver.findElement(UserNameL);
+            UserName.sendKeys(UsernameTestdata);	
+            sheet.getRow(1).createCell(0).setCellValue(UsernameTestdata);
+            
+		  // <input name="txtPassword" id="txtPassword" autocomplete="off" type="password">
+            
+            String passwordTestData="Hannu012001@";
+            By  PasswordLocator=By.id(property.getProperty("passwordNamePropert"));
+           WebElement Password=driver.findElement(PasswordLocator);
+           Password.sendKeys(passwordTestData);
+           sheet.getRow(1).createCell(1).setCellValue(passwordTestData);
+          
+		  //<input type="submit" name="Submit" class="button" id="btnLogin" value="LOGIN">
+		
+		
+		  By LoginL1=By.className(property.getProperty("logInButtonProperty"));
+		  WebElement  Loginn=driver.findElement(LoginL1);
+		  Loginn.click();
+		  
+		 //  <a href="/orangehrm-4.2.0.1/symfony/web/index.php/admin/viewAdminModule" id="menu_admin_viewAdminModule" class="firstLevelMenu"><b>Admin</b></a>
+		//  By  adminLocator=By.id("menu_admin_viewAdminModule");
+		 // WebElement admin= driver.findElement(adminLocator);
+		  
+		  String expectedText="Admin";
+		  System.out.println("expexted Text of Admin:"+expectedText);
+		  By  adminLocator=By.id(property.getProperty("AdminProperty"));
+		  WebElement admin= driver.findElement(adminLocator);
+		 // admin.click();
+	    	String  actualText=admin.getText();
+	    	System.out.println(actualText);
+	    	
+	    	if(actualText.equals(expectedText))
+	    	{
+	    		System.out.println("passed");
+	    		row.createCell(2).setCellValue("Pass");
+	    		
+	    	}
+	    	else
+	    	{
+	    		System.out.println(" failed");
+	    		row.createCell(2).setCellValue("false");
+	    	}
+	    	// String AdminHomepage= admin.getText();
+	    	 //row.createCell(2).setCellValue(AdminHomepage);
+	    	  file1=new FileOutputStream("C:\\Users\\Dell\\Desktop\\Eclipse1\\OrangeHRM_DDT\\src\\com\\ApplicationTestResultFiles/ExcelReadAndWriteMultipleTestResultData.xlsx");
+	          workBook.write(file1); 
+	           
+	          
+		
+	      }
+		   
+		        	 		   
+		 
+		   @Test(priority=3)
+		   public void logOutTest() throws InterruptedException
+	   {
+			
+			   
+			 //<a href="#" id="welcome" class="panelTrigger activated-welcome">Welcome Admin</a>
+				// locator=linkTest
+				  
+		    
+		 By WelcomeAdminL=By.id(property.getProperty("welcomeAdminProperty"));
+	     WebElement WelcomeAdmin=driver.findElement(WelcomeAdminL);
+	     WelcomeAdmin.click();
+		
+	     // mouse hover operations
+		
+	     Actions action=new Actions(driver);
+	     action.moveToElement(WelcomeAdmin).build().perform();
+		
+	     
+	     Thread.sleep(3000);
+	     By LogoutL=By.linkText(property.getProperty("logOutProperty"));
+	     WebElement  Logout=driver.findElement(LogoutL);
+		 Logout.click();
+	   
+		   
+		 System.out.println(driver.getTitle());
+		   
+		
+	//	File  OrangeHrmScreenShot=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		  
+	       
+	//	  FileUtils.copyFile(OrangeHrmScreenShot,new File("./ApplicationScreenShots/hrmscreenshot.png"));
+	  } 
+  
+		   
+  
+	
+  }
+  

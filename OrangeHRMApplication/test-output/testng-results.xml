@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-02-03T14:02:15 IST" name="Default suite" finished-at="2023-02-03T14:02:25 IST" duration-ms="9962">
+    <groups>
+    </groups>
+    <test started-at="2023-02-03T14:02:15 IST" name="Default test" finished-at="2023-02-03T14:02:25 IST" duration-ms="9962">
+      <class name="com.OrangeHRMApplicationTestCases.LoginFunctionality">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.OrangeHRMApplicationTestCases.LoginFunctionality@4d0f2471]" started-at="2023-02-03T14:02:15 IST" name="setup" finished-at="2023-02-03T14:02:23 IST" duration-ms="8488" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="ValidatingPageTest()[pri:1, instance:com.OrangeHRMApplicationTestCases.LoginFunctionality@4d0f2471]" started-at="2023-02-03T14:02:23 IST" name="ValidatingPageTest" description="ValidatingloginPage-LOGIN Panel Text" finished-at="2023-02-03T14:02:25 IST" duration-ms="1409" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ValidatingPageTest -->
+        <test-method signature="ValidatingLoginFunctionalityTest()[pri:2, instance:com.OrangeHRMApplicationTestCases.LoginFunctionality@4d0f2471]" started-at="2023-02-03T14:02:25 IST" name="ValidatingLoginFunctionalityTest" description="OrangeHRM Application login Functionality" finished-at="2023-02-03T14:02:25 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ValidatingLoginFunctionalityTest -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:com.OrangeHRMApplicationTestCases.LoginFunctionality@4d0f2471]" started-at="2023-02-03T14:02:25 IST" name="teardown" finished-at="2023-02-03T14:02:25 IST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- com.OrangeHRMApplicationTestCases.LoginFunctionality -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,32 @@
+package com.Stepdefination;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+
+public class Hooks
+ {
+	 
+	public static WebDriver driver;
+	
+	@Before
+	public static void setup()
+	{
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\Dell\\Desktop\\Eclipse1\\JavaProgram\\DriverFiles\\chromedriver.exe" );
+		
+		
+		driver =new ChromeDriver();
+		
+		
+		
+	}
+	
+	@After
+	public static void teardown()
+	{
+		driver.quit();
+	}
+
+}

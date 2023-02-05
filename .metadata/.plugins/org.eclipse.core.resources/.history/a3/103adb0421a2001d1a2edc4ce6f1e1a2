@@ -1,0 +1,64 @@
+package com.OrangeHRMApplicationTestCases;
+
+import java.io.IOException;
+import java.sql.Driver;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
+import com.OrangeHRMApplication.BaseTest;
+import com.Utility.ExcelCommonMethod;
+import com.Utility.Log;
+import com.Utility.OHRMScreenShot;
+import com.Utility.OrangeHRMProperty;
+
+public class LoginFunctionality extends BaseTest 
+ {
+	Properties property;
+	String excelfileInPutPath="./src/main/java/com/OrangeHRMApplicationTestDataFiles/LogInTest.xlsx";
+	String excelfilOutputPath="./src/main/java/com/OrangeHRMApplicationTestDataResultFiles/LogInTestResults.xlsx";
+	String sheetName="sheet1";
+	
+	ExcelCommonMethod excelfile;
+			
+	@Test(priority=1,description="ValidatingloginPage-LOGIN Panel Text")
+	
+		public void ValidatingPageTest() throws IOException
+		{
+		  excelfile=new ExcelCommonMethod(excelfileInPutPath, excelfilOutputPath, sheetName);
+		  
+		  property=OrangeHRMProperty.loadProperties();
+		  
+		 By loginPageLoginPanelTestLocator=By.id(property.getProperty("logInnPageLogInPanalProperty"));
+		 String actual_loginpageLoginPanelTest=driver.findElement(loginPageLoginPanelTestLocator).getText();
+		 
+		 excelfile.SetCellValue(1, 1, actual_loginpageLoginPanelTest);
+		 String expected_loginpageLoginPanelTest=excelfile.getCellValue(1, 0);
+		 
+		 if(actual_loginpageLoginPanelTest.equals(expected_loginpageLoginPanelTest))
+        {
+	       Log.info("Successfully navigate to OrangeHRM Application-fail");
+	       
+	       excelfile.SetCellValue(1, 2,"failed to navigate to OrangeHRM Application-fail");
+	       OHRMScreenShot.takesScreenshot(driver," errorToNavigateToOHRM");
+			 
+			 
+			 
+        }
+		 
+		  
+		
+		
+		
+		}
+	
+		
+		
+		
+	
+	
+	
+	
+
+}

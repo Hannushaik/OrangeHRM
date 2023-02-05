@@ -1,0 +1,152 @@
+package com.OrangeHRMApplicationTestCases;
+
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
+
+import com.BaseTest.BaseTest;
+
+public class OrangeHRM_AddEmployeeTest extends BaseTest
+ {
+	@Test(priority=1)
+	public void loginpageValidationTest()
+    	{
+	     	String expected_loginpageTest="LOGIN Panel";
+	    	System.out.println("expected login page test is:"+expected_loginpageTest);
+		
+	     	//<div id="logInPanelHeading">LOGIN Panel</div>
+	    	By loginpanalL=By.id("logInPanelHeading");
+	    	WebElement  loginpanal=driver.findElement(loginpanalL);
+	    	String actual_loginpageTest=loginpanal.getText();
+		    System.out.println("actual login page test is:"+actual_loginpageTest);
+		
+	     	if(actual_loginpageTest.equals(expected_loginpageTest))
+	      {
+			System.out.println("OrangeHRM login page is - pass");
+	     }
+	    else
+		 {
+			System.out.println("Orange login page is- fail");
+		 }
+		 
+	   }
+	
+     	@Test(priority=2)	
+     	public void loginTest()
+	   {
+		    String userNameTestData="Hannusk";
+	        By	userNameL=By.id("txtUsername");
+	        WebElement  userName=driver.findElement(userNameL);
+	        userName.sendKeys(userNameTestData);
+	       
+	        String passwordTestData="Hannu012001@";
+            By  PasswordLocator=By.id("txtPassword");
+           WebElement Password=driver.findElement(PasswordLocator);
+           Password.sendKeys(passwordTestData);
+	        
+	        
+	        By LoginL= By.className("button");
+	        WebElement  Login= driver.findElement(LoginL);
+	        Login.click();
+	   }
+     	
+     	@Test(priority=3)
+     	public void welcomeAdmin()
+     	{
+     		 By SigninL=By.linkText("Welcome Admin");
+     		 WebElement Signin=driver.findElement(SigninL);
+     		 Signin.click();
+     		
+     		
+     	}
+     	@Test(priority=4)
+     	public void PIMTest()
+     	{
+     	   By pimL=By.linkText("PIM");
+     	   WebElement  pim=driver.findElement(pimL);
+     	   pim.click();
+     	
+     	}
+     	
+     	@Test(priority=5)
+     	public void AddemployeeTest()
+     	{
+     	    By AddEmployeeL=By.linkText("Add Employee");
+        	WebElement AddEmployee=driver.findElement(AddEmployeeL);
+        	AddEmployee.click();
+     			
+     	}
+     	
+     	@Test(priority=6)
+     	public void NewEmployeeTest() throws InterruptedException, IOException
+     	{
+     		
+        	By FirstNameLocator=By.id("firstName");
+            WebElement FirstName=driver.findElement(FirstNameLocator);
+            FirstName.sendKeys("Chota");
+            
+            Actions act=new Actions(driver);
+            act.sendKeys(Keys.TAB).build().perform();
+            
+            
+            By MiddleNameLocator=By.id("middleName");
+            WebElement MiddleName=driver.findElement(MiddleNameLocator);
+            MiddleName.sendKeys("Gokar");
+            
+            act.sendKeys(Keys.TAB).build().perform();
+            
+            By LastNameLocator=By.id("lastName");
+           WebElement LastName=driver.findElement(LastNameLocator);
+           LastName.sendKeys("Shaik");
+           
+           act.sendKeys(Keys.TAB).build().perform();
+           
+          // By EmployeeIdLocator=By.id("employeeId");
+          // WebElement EmployeeId=driver.findElement(EmployeeIdLocator);
+           act.sendKeys(Keys.TAB).build().perform();
+          act.sendKeys(Keys.ENTER).build().perform();
+          
+          
+          Thread.sleep(5000);
+          java.lang.Runtime.getRuntime().exec("C:\\Users\\Dell\\Desktop\\Eclipse1\\OrangeHRM_DDT\\AutoItImageCreation.exe");
+       //   By  saveButtonLocator=By.id("btnSave");
+        //  WebElement saveButton=driver.findElement(saveButtonLocator);
+         // saveButton.click();
+          // validate upload photo
+          
+          
+          
+          By  employeephotographLocator=By.id("photofile");
+          WebElement employeephotograph= driver.findElement(employeephotographLocator);
+          
+          
+          boolean flag=employeephotograph.isDisplayed();
+          
+          if(flag)
+          {
+        	  
+        	  System.out.println("Employee photograph uploaded success-pass");
+        	  
+          }
+          else
+          {
+        	  
+        	  System.out.println("Employee photograph uploaded failed-fail");
+          }
+           
+          By  saveButtonLocator=By.id("btnSave");
+          WebElement saveButton=driver.findElement(saveButtonLocator);
+          saveButton.click();
+     		
+     	}
+	
+	
+	
+	
+	
+
+ }

@@ -1,0 +1,16 @@
+<suite name="OrangeHRMApplication">
+  <test name="chrome">
+    <parameter name="Browser" value="chrome"/>
+      <classes>
+       <class name="com.Grid.OrangeHRMApplicationLogInTest"/>
+    </classes>
+  </test>
+    
+    <test name="firefox">
+      <parameter name="Browser" value="firefox"/>
+         <classes>
+            <class name="com.Grid.OrangeHRMApplicationLogInTest"/>
+         </classes>
+       </test>     
+   
+</suite>

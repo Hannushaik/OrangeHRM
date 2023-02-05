@@ -1,0 +1,7 @@
+<suite name="OrangeHRM Application">
+  <test name="chrome">
+   <parameter name="Browser" value="chrome"/>
+      <classes>
+         <vlass name="com.Grid.OrangeHRMApplicationLogInTest/>
+     </test>
+   </suite>

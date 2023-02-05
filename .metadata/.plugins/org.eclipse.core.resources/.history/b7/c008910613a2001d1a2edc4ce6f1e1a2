@@ -1,0 +1,12 @@
+package com.Utility;
+
+
+
+public class OrangeHRMProperty
+{
+	public static properties loadProperties()
+	{
+		
+	}
+
+}

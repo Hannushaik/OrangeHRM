@@ -1,0 +1,183 @@
+package com.OrangeHRMApplicationTestCases;
+
+import java.io.IOException;
+
+import java.util.Properties;
+
+import org.apache.poi.ss.usermodel.DataValidationConstraint.ValidationType;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import com.OrangeHRMApplication.BaseTest;
+import com.Utility.ExcelCommonMethod;
+import com.Utility.Log;
+import com.Utility.OHRMScreenShot;
+import com.Utility.OrangeHRMProperty;
+
+public class LoginFunctionality extends BaseTest 
+ {
+	Properties property;
+	String excelfileInPutPath="./src/main/java/com/OrangeHRMApplicationTestDataFiles/LogInTest.xlsx";
+	String excelfilOutputPath="./src/main/java/com/OrangeHRMApplicationTestDataResultFiles/LogInTestResults.xlsx";
+	String sheetName="sheet1";
+	ExcelCommonMethod excelFile;
+	
+	ExcelCommonMethod excelfile;
+			
+	@Test(priority=1,description="ValidatingloginPage-LOGIN Panel Text")
+	
+		public void ValidatingPageTest() throws IOException
+		{
+		  excelfile=new ExcelCommonMethod(excelfileInPutPath, excelfilOutputPath, sheetName);
+	 	  
+		  property=OrangeHRMProperty.loadProperties();
+		  
+		 By loginPageLoginPanelTestLocator=By.id(property.getProperty("logInnPageLogInPanalProperty"));
+		 String actual_loginpageLoginPanelTest=driver.findElement(loginPageLoginPanelTestLocator).getText();
+		 
+		 excelfile.SetCellValue(1, 1, actual_loginpageLoginPanelTest);
+		 String expected_loginpageLoginPanelTest=excelfile.getCellValue(1, 0);
+		 
+		 if(actual_loginpageLoginPanelTest.equals(expected_loginpageLoginPanelTest))
+        {
+	       Log.info("Successfully navigate to OrangeHRM Application-pass");
+	       
+	       excelfile.SetCellValue(1, 2,"failed to navigate to OrangeHRM Application-fail");
+	       OHRMScreenShot.takesScreenshot(driver," errorToNavigateToOHRM");
+				 
+        }
+		 
+	} 	
+ 
+	@Test(priority=2,description="OrangeHRM Application login Functionality")
+	
+	
+	public void ValidatingLoginFunctionalityTest()
+	{
+		
+		int rowIndex=1;
+		while(true)
+		{
+			try
+			{
+				String UserNAme=excelfile.getCellValue(rowIndex, 3);
+				String password=excelfile.getCellValue(rowIndex, 4);
+				
+			    By UserNameElementLocator=By.id(property.getProperty("userNameProperty"));
+			    WebElement  UserNameElement= driver.findElement(UserNameElementLocator);
+			    UserNameElement.clear();
+			    UserNameElement.sendKeys("UserName");
+			    
+			    By passwordElementLocator=By.name(property.getProperty("passwordNameProperty"));
+			    WebElement  passwordElement=driver.findElement(passwordElementLocator);
+			    passwordElement.clear();
+			    passwordElement.sendKeys("password");
+			   
+			    By loginpageLoginButtonLocator=By.className("logInButtonProperty");
+			    driver.findElement(loginpageLoginButtonLocator).click();
+			    
+			    if(isLoginPage())
+			    {
+			    	
+			    	// LoginPage
+			    	
+			    	Log.info("failed to navigate OrangeHRM Application - fail");
+			    	
+			    	OHRMScreenShot.takesScreenshot(driver, "UserName+Password");
+			    	
+			    	excelfile.SetCellValue(rowIndex, 7," failed to navigate OrangeHRM Apllication- fail");
+			    }
+			    else
+			    {
+			    	// Home page
+			    	
+			    	Log.info("successfully navigate to Orange HRM -pass");
+			    	
+			    	ValidateHomePage(rowIndex);
+			    	logout();
+			    	
+			    }
+			    rowIndex++;
+			    }
+		
+				catch(Exception e)
+				{
+					break;
+				}
+		
+				//excelfile.saveExcelData();
+			
+			    
+		}    	
+	} 
+	
+
+		private boolean isLoginPage()
+       {
+	   try
+     	{
+          	By loginpageInvalidMessageLocator=By.id("invaidMessageProperty");
+            return	driver.findElement(loginpageInvalidMessageLocator).isDisplayed();	
+	    }
+	   catch(Exception e)
+	   {
+		
+		return false;
+	}
+		
+
+}
+		
+		private void ValidateHomePage(int rowIndex)
+		{
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+		
+		private void logout()
+		{
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	
+ }
+	
